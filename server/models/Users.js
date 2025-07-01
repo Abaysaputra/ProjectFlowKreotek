@@ -1,11 +1,10 @@
-import { DataTypes } from 'sequelize';
-import db from '../config/database.js';
-
-const User = db.define('users', {
+export default (sequelize, DataTypes) => {
+  return sequelize.define('User', {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.ENUM('admin', 'client'),
-}, { timestamps: true });
-
-export default User;
+    role: DataTypes.STRING // harus ada role 'client' agar relasi valid
+  }, {
+    tableName: 'users',
+    timestamps: false
+  });
+};
