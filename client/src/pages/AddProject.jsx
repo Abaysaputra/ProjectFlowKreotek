@@ -16,7 +16,11 @@ const AddProject = () => {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/users/clients");
+        const response = await axios.get("http://localhost:5000/api/clients");
+        console.log("✅ Data klien berhasil diambil:", response.data);
+        if (!Array.isArray(response.data)) {
+          throw new Error("Data klien tidak valid");
+        }
         setClients(response.data);
       } catch (error) {
         console.error("Gagal mengambil data klien:", error);

@@ -1,28 +1,20 @@
 import express from 'express';
 import cors from 'cors';
-import { sequelize, User, Project } from './models/index.js'; // 👈 pastikan ini sesuai dengan export-mu
+import db from './models/index.js';
 import projectRoutes from './routes/projectRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ✅ Gunakan router
 app.use('/api/projects', projectRoutes);
+app.use('/api', userRoutes); 
 
-// ✅ Tambahkan endpoint debug
-app.get('/debug/users', async (req, res) => {
-  try {
-    const users = await User.findAll(); // Bukan db.User
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// ✅ Koneksi DB dan jalankan server
 try {
-  await sequelize.authenticate();
-  await sequelize.sync();
+  await db.sequelize.authenticate();
+  await db.sequelize.sync();
   console.log('✅ Database connected & synced');
 } catch (error) {
   console.error('❌ Database connection failed:', error);
