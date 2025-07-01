@@ -10,7 +10,7 @@ app.use(express.json());
 
 // ✅ Gunakan router
 app.use('/api/projects', projectRoutes);
-app.use('/api', userRoutes); 
+app.use('/api', userRoutes);  
 
 try {
   await db.sequelize.authenticate();

@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
 import AddProject from "./pages/AddProject";
+import AddClient from "./pages/AddClient";
 import ProjectTasks from "./pages/ProjectTasks";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/add" element={<AddProject />} />
+              <Route path="/clients/add" element={<AddClient />} />
               <Route path="/projects/:projectId/tasks" element={<ProjectTasks />} />
               {/* Tambahkan rute lainnya sesuai kebutuhan */}
             </Routes>

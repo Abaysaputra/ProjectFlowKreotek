@@ -8,6 +8,7 @@ const Sidebar = ({ isOpen, toggle }) => {
         <Link to="/" className="hover:text-blue-600">🏠 Dashboard</Link>
         <Link to="/projects" className="hover:text-blue-600">📋 Projects</Link>
         <Link to="/projects/add" className="hover:text-blue-600">➕ Tambah Project</Link>
+        <Link to="/clients/add" className="hover:text-blue-600">👥 Clients</Link>
       </nav>
     </aside>
   );
