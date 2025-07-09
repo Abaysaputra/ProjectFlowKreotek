@@ -1,3 +1,4 @@
+Project.belongsToMany(User, { through: 'project_members', foreignKey: 'projectId' });
 export default (sequelize, DataTypes) => {
   return sequelize.define('Project', {
     name: { type: DataTypes.STRING, allowNull: false },
