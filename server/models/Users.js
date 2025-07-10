@@ -1,5 +1,4 @@
-// models/User.js
-User.belongsToMany(Project, { through: 'project_members', foreignKey: 'userId' });
+
 
 export default (sequelize, DataTypes) => {
   return sequelize.define('User', {

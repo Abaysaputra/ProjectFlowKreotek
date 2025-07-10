@@ -1,10 +1,10 @@
-import { DataTypes } from "sequelize";
-
-module.exports = (sequelize, DataTypes) => {
-  const ProjectMember = sequelize.define("ProjectMember", {
+// models/ProjectMember.js
+export default (sequelize, DataTypes) => {
+  return sequelize.define("ProjectMember", {
     project_id: DataTypes.INTEGER,
-    user_id: DataTypes.INTEGER
+    user_id: DataTypes.INTEGER,
+  }, {
+    tableName: 'project_members',
+    timestamps: false
   });
-
-  return ProjectMember;
 };
