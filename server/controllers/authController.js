@@ -2,7 +2,7 @@
     import bcrypt from "bcrypt";
     import jwt from "jsonwebtoken";
 
-    const SECRET_KEY = "RAHASIA123"; // Ganti dengan .env di production
+    const SECRET_KEY = "RAHASIA123"; 
 
     export const login = async (req, res) => {
     const { email, password } = req.body;

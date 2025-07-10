@@ -5,7 +5,7 @@
     const [form, setForm] = useState({
         name: "",
         email: "",
-        password: "" // optional: hanya jika dibutuhkan
+        password: ""
     });
 
     const handleChange = (e) => {

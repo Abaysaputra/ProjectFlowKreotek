@@ -12,18 +12,13 @@ const Header = ({ toggleSidebar }) => {
   };
 
   return (
-    // Perubahan utama ada di baris ini
     <header className="flex justify-between items-center bg-white px-6 py-3 border-b border-gray-200 sticky top-0 z-20 md:ml-64">
-      {/* Sidebar toggle (mobile only) & Judul Halaman */}
       <div className="flex items-center gap-4">
         <button onClick={toggleSidebar} className="md:hidden text-gray-700 focus:outline-none">
           <Bars3Icon className="w-6 h-6" />
         </button>
-        {/* Anda bisa membuat judul ini dinamis jika perlu */}
         <h1 className="text-lg font-semibold">Dashboard</h1>
       </div>
-
-      {/* User info & logout */}
       <div className="flex items-center gap-4">
         <span className="text-sm text-gray-600 hidden sm:inline">👋 Hi, Admin</span>
         <button

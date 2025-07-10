@@ -4,18 +4,15 @@ import createProjectModel from './Project.js';
 import defineProjectMember from './ProjectMember.js';
 
 
-// Inisialisasi koneksi
 const sequelize = new Sequelize('projectflow', 'root', '', {
   host: 'localhost',
   dialect: 'mysql'
 });
 
-// Inisialisasi model
 const User = createUserModel(sequelize, DataTypes);
 const Project = createProjectModel(sequelize, DataTypes);
 const ProjectMember = defineProjectMember(sequelize, DataTypes);
 
-// Relasi antar model
 User.hasMany(Project, { foreignKey: 'client_id', as: 'projects' });
 Project.belongsTo(User, { foreignKey: 'client_id', as: 'client' });
 
@@ -32,7 +29,6 @@ User.belongsToMany(Project, {
   as: 'assignedProjects'
 });
 
-// Export semua model & koneksi
 export {
   sequelize,
   User,

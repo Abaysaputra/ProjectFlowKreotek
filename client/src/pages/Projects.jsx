@@ -10,9 +10,7 @@ const Projects = () => {
   const [filterStatus, setFilterStatus] = useState("all");
   const [sortOrder, setSortOrder] = useState("asc");
   const [editing, setEditing] = useState(null);
-  const [allMembers, setAllMembers] = useState([]); // State untuk semua anggota potensial
-
-  // Fungsi untuk mengambil data proyek dan anggota
+  const [allMembers, setAllMembers] = useState([]); 
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -33,14 +31,12 @@ const Projects = () => {
     fetchData();
   }, []);
 
-  // Fungsi untuk mengubah status proyek
   const updateStatus = (id, newStatus) => {
     axios.patch(`http://localhost:5000/api/projects/${id}`, { status: newStatus })
       .then(fetchData)
       .catch(err => console.error("Update status error:", err));
   };
 
-  // Fungsi untuk menghapus proyek
   const deleteProject = (id) => {
     if (window.confirm("Yakin hapus proyek ini?")) {
       axios.delete(`http://localhost:5000/api/projects/${id}`)
@@ -49,7 +45,6 @@ const Projects = () => {
     }
   };
 
-  // Fungsi untuk memulai mode edit
 const startEdit = (proj) => {
   setEditing({
     id: proj.id,
@@ -59,8 +54,6 @@ const startEdit = (proj) => {
     memberIds: proj.members?.map(m => m.id) ?? [], 
   });
 };
-  // Fungsi untuk menyimpan hasil edit
-  // GANTI FUNGSI submitEdit LAMA ANDA DENGAN YANG INI
 
 const submitEdit = async (e) => {
     e.preventDefault();
@@ -68,20 +61,16 @@ const submitEdit = async (e) => {
 
     const { id, name, description, deadline, memberIds } = editing;
     
-    // Cari proyek original dari state
     const originalProject = projects.find(p => p.id === id);
     if (!originalProject) return;
 
     try {
-        // 1. Update detail proyek
         const projectUpdatePromise = axios.put(`http://localhost:5000/api/projects/${id}`, {
             name,
             description,
             deadline,
             status: originalProject.status
         });
-
-        // 2. Kalkulasi perbedaan anggota (SEKARANG SUDAH AMAN)
         const originalMemberIds = new Set(originalProject.members?.map(m => m.id) ?? []);
         const newMemberIds = new Set(memberIds);
         
@@ -96,18 +85,16 @@ const submitEdit = async (e) => {
             axios.delete(`http://localhost:5000/api/projects/${id}/members/${userId}`)
         );
 
-        // Jalankan semua promise secara paralel
         await Promise.all([projectUpdatePromise, ...addPromises, ...removePromises]);
 
         setEditing(null);
-        fetchData(); // Muat ulang data
+        fetchData();
     } catch (err) {
         console.error("Edit error:", err);
-        alert("Gagal menyimpan perubahan."); // Beri notifikasi ke user
+        alert("Gagal menyimpan perubahan.");
     }
   };
 
-  // Fungsi bantuan untuk style status
   const getStatusStyles = (status) => {
     switch (status) {
       case 'done': return 'bg-green-100 text-green-800 border-green-300';
@@ -117,7 +104,6 @@ const submitEdit = async (e) => {
     }
   };
 
-  // Logika filter dan sort
   const filteredAndSortedProjects = projects
     .filter(p => filterStatus === "all" ? true : p.status === filterStatus)
     .sort((a, b) =>
@@ -148,7 +134,6 @@ const submitEdit = async (e) => {
           </select>
         </div>
 
-        {/* --- FORM EDIT --- */}
         {editing && (
           <form onSubmit={submitEdit} className="bg-white p-6 rounded-lg shadow-md mb-8 border border-blue-200">
             <h3 className="font-semibold text-xl mb-4 text-gray-700">✏️ Edit Proyek: <span className="text-blue-600">{editing.name}</span></h3>
@@ -158,7 +143,6 @@ const submitEdit = async (e) => {
             </div>
             <textarea required placeholder="Deskripsi Proyek" value={editing.description} onChange={e => setEditing({ ...editing, description: e.target.value })} className="w-full p-2 border border-gray-300 rounded-md my-4 h-24 focus:ring-2 focus:ring-blue-300"/>
             
-            {/* --- Tambahan: Edit Anggota Proyek --- */}
             <div>
                 <Listbox value={editing.memberIds} onChange={ids => setEditing({...editing, memberIds: ids})} multiple>
                     <Listbox.Label className="block text-sm font-medium text-gray-700 mb-1">Edit Anggota Proyek</Listbox.Label>
@@ -186,7 +170,6 @@ const submitEdit = async (e) => {
                     </div>
                 </Listbox>
             </div>
-            {/* --- End of Tambahan --- */}
 
             <div className="flex gap-3 mt-6">
               <button type="submit" className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition shadow-sm">Simpan Perubahan</button>
@@ -194,8 +177,6 @@ const submitEdit = async (e) => {
             </div>
           </form>
         )}
-
-        {/* ... Tampilan Kartu Proyek ... */}
         {loading ? <p className="text-center text-gray-500">⏳ Memuat data proyek...</p> : filteredAndSortedProjects.length > 0 ? (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredAndSortedProjects.map(proj => (

@@ -1,7 +1,7 @@
 import { User } from '../models/index.js';
 
 export const getClients = async (req, res) => {
-  console.log("✅ getClients dipanggil"); // ⬅️ Tambahkan ini
+  console.log("✅ getClients dipanggil"); 
   try {
     const clients = await User.findAll({ where: { role: 'client' } });
     res.json(clients);
@@ -9,7 +9,6 @@ export const getClients = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-// ✅ Tambahkan ini
 export const createClient = async (req, res) => {
   try {
     const { name, email, password } = req.body; 

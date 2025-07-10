@@ -11,13 +11,11 @@ import ProjectTasks from "./pages/ProjectTasks";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 
-// Komponen Layout Utama
 function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    // TAMBAHKAN text-gray-800 DI SINI
     <div className="flex h-screen bg-gray-100 text-gray-800">
       <Sidebar isOpen={sidebarOpen} toggle={toggleSidebar} />
       <div className="flex-1 flex flex-col overflow-hidden">
@@ -30,16 +28,12 @@ function AppLayout() {
   );
 }
 
-// Root App (yang mengatur semua routing)
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          {/* Rute untuk Login (di luar layout utama) */}
           <Route path="/login" element={<Login />} />
-
-          {/* Grup Rute yang Dilindungi (semuanya menggunakan AppLayout) */}
           <Route
             path="/"
             element={
@@ -48,7 +42,6 @@ function App() {
               </ProtectedRoute>
             }
           >
-            {/* Rute anak ini akan dirender di dalam <Outlet> milik AppLayout */}
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="projects" element={<Projects />} />
@@ -56,8 +49,6 @@ function App() {
             <Route path="projects/:projectId/tasks" element={<ProjectTasks />} />
             <Route path="clients/add" element={<AddClient />} />
           </Route>
-
-          {/* Rute fallback jika URL tidak ditemukan, arahkan ke login */}
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>

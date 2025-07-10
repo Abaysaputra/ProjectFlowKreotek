@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { Project, User } = require("../models");
 
-// ✅ Tambahkan user ke proyek
 router.post("/:projectId/add-member", async (req, res) => {
   const { projectId } = req.params;
   const { userId } = req.body;
@@ -22,7 +21,6 @@ router.post("/:projectId/add-member", async (req, res) => {
   }
 });
 
-// ❌ Hapus user dari proyek
 router.delete("/:projectId/remove-member/:userId", async (req, res) => {
   const { projectId, userId } = req.params;
 

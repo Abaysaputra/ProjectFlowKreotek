@@ -1,4 +1,3 @@
-// models/ProjectMember.js
 export default (sequelize, DataTypes) => {
   return sequelize.define("ProjectMember", {
     project_id: DataTypes.INTEGER,

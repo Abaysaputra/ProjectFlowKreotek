@@ -4,8 +4,7 @@ import { getAllUsers } from '../controllers/userController.js';
 
 const router = express.Router();
 
-// ✅ perbaiki path
 router.get('/clients', getClients);
 router.post('/clients', createClient);
-router.get('/', getAllUsers); // GET /api/users
+router.get('/', getAllUsers); 
 export default router;

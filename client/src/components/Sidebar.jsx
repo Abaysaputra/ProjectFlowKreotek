@@ -16,8 +16,6 @@ const navLinkClassName = ({ isActive }) =>
       <NavLink to="/dashboard" className={navLinkClassName} onClick={isOpen ? toggle : undefined}>
         🏠 Dashboard
       </NavLink>
-
-      {/* Menu Project dengan Dropdown */}
       <div>
         <button
           onClick={() => setProjectsOpen(!isProjectsOpen)}
@@ -31,12 +29,11 @@ const navLinkClassName = ({ isActive }) =>
           />
         </button>
 
-        {/* Submenu yang muncul/hilang */}
         {isProjectsOpen && (
           <div className="mt-1 pl-7 flex flex-col gap-1">
             <NavLink
               to="/projects"
-              end // 'end' prop penting agar ini tidak aktif saat di /projects/add
+              end
               className={navLinkClassName}
               onClick={isOpen ? toggle : undefined}
             >
@@ -61,15 +58,11 @@ const navLinkClassName = ({ isActive }) =>
 
   return (
     <>
-      {/* Sidebar Desktop */}
       <aside className="hidden md:block w-64 bg-white text-gray-800 h-screen p-4 shadow-lg fixed top-0 left-0 border-r border-gray-200 overflow-y-auto">
         <h2 className="text-2xl font-bold mb-8 p-3">🚀 ProjectFlow</h2>
         {navContent}
       </aside>
-
-      {/* Sidebar Mobile (Drawer) */}
       <div className={`fixed inset-0 z-40 md:hidden transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
-        {/* Backdrop */}
         <div className="absolute inset-0 bg-black opacity-30" onClick={toggle}></div>
 
         <aside className="relative w-64 bg-white text-gray-800 h-full p-4 shadow-lg z-50 overflow-y-auto">

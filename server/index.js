@@ -12,11 +12,8 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
-// const projectMemberRoutes = require("./routes/projectMember");
 
-// ✅ Gunakan router
 app.use('/api/projects', projectRoutes);
-// app.use("/api/project-members", projectMemberRoutes);
 app.use('/api', userRoutes);  
 app.use('/api/users', userRoutes); 
 app.use('/api/auth', authRoutes);

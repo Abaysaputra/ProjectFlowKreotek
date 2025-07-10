@@ -4,6 +4,6 @@ import { login, register } from '../controllers/authController.js';
 const router = express.Router();
 
 router.post('/login', login);
-router.post('/register', register); // (opsional untuk testing)
+router.post('/register', register); 
 
 export default router;
