@@ -16,28 +16,12 @@ Sebuah platform operasi terpadu (*all-in-one*) untuk agensi digital dan *softwar
 - **Real-time:** Socket.IO
 - **Otentikasi:** JSON Web Tokens (JWT)
 
+---
+
 ## 🛠️ Cara Menjalankan Secara Lokal
 
-1.  **Clone repositori ini:**
-    ```bash
-    git clone [https://github.com/username/projectflow-os.git](https://github.com/username/projectflow-os.git)
-    cd projectflow-os
-    ```
+### 1. Clone Repositori
 
-2.  **Setup Backend:**
-    ```bash
-    cd backend
-    npm install
-    # Buat file .env berdasarkan .env.example dan isi variabelnya
-    npx prisma migrate dev
-    npm run dev
-    ```
-
-3.  **Setup Frontend:**
-    ```bash
-    cd ../frontend
-    npm install
-    npm run dev
-    ```
-
-4.  Buka `http://localhost:5173` di browser Anda.
+```bash
+git clone https://github.com/username/projectflow-os.git
+cd projectflow-os
